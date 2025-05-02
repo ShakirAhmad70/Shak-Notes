@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Shak Notes</string>
+    <string name="no_notes">No Notes</string>
+    <string name="no_folders">No Folders</string>
+    <string name="add_new_note">Add New Note</string>
+    <string name="add_new_folder">Add New Folder</string>
+    <string name="fab_desc">Add new note or folder</string>
+    <string name="folder">Folder</string>
+    <string name="home">Home</string>
+    <string name="select">Select</string>
+    <string name="search">Search</string>
+    <string name="sync">Sync</string>
+    <string name="setup">Setup</string>
+    <string name="notes_app">Notes App</string>
+</resources>

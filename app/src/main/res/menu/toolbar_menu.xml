@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/select"
+        android:title="@string/select"
+        android:icon="@drawable/ic_select"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/sync"
+        android:title="@string/sync"
+        android:icon="@drawable/ic_sync"
+        app:showAsAction="collapseActionView"
+        />
+
+    <item
+        android:id="@+id/setup"
+        android:title="@string/setup"
+        android:icon="@drawable/ic_setup"
+        app:showAsAction="collapseActionView"
+        />
+
+</menu>

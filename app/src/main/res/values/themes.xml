@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ShakNotes" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+    </style>
+
+    <style name="Theme.ShakNotes" parent="Base.Theme.ShakNotes" />
+
+    <style name="BottomNavTextStyle" parent="TextAppearance.AppCompat.Caption">
+        <item name="fontFamily">@font/tagesschrift_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ToolBarTextStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/tagesschrift_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="ToolBarSubtitleTextStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:fontFamily">@font/tagesschrift_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+</resources>
