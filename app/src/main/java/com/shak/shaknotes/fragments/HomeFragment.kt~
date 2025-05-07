@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.shak.shaknotes.R
-import com.shak.shaknotes.adapters.NoteRvAdapter
 import com.shak.shaknotes.database.dbHelpers.NoteDbHelper
 import com.shak.shaknotes.database.entities.Note
 import kotlinx.coroutines.launch
@@ -63,19 +62,19 @@ class HomeFragment : Fragment() {
                         noteDbHelper.noteDao()
                             .insertNote(Note(title = title, noteContent = noteContent))
 
-                        val notes: ArrayList<Note> =
-                            noteDbHelper.noteDao().getAllNotes() as ArrayList<Note>
+                        val notes: ArrayList<Note> = noteDbHelper.noteDao().getAllNotes() as ArrayList<Note>
 
                         if (notes.isEmpty()) {
                             showEmptyLay.visibility = View.VISIBLE
                             showItemsRV.visibility = View.GONE
-
-                            showItemsRV.adapter = NoteRvAdapter(notes)
-
                         } else {
                             showEmptyLay.visibility = View.GONE
                             showItemsRV.visibility = View.VISIBLE
                         }
+
+
+                        showItemsRV.adapter = NoteRvAdapter(requireContext())
+
 
                         addNoteDialog.dismiss()
                     }

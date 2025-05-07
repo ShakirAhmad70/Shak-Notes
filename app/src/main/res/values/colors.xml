@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_color">#ffffff</color>
     <color name="bars_color">#2AC2D3</color>
+    <color name="status_bar_color">#03A9F4</color>
+    <color name="cardColor">#B7C0E9</color>
 </resources>

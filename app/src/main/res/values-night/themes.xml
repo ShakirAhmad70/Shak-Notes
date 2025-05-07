@@ -6,6 +6,17 @@
     </style>
 
 
+    <style name="Theme.ShakNotes" parent="Base.Theme.ShakNotes" >
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+        <item name="colorAccent">@color/bars_color</item>
+    </style>
+
+    <style name="FullWidthDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="BottomNavTextStyle" parent="TextAppearance.AppCompat.Caption">
         <item name="fontFamily">@font/tagesschrift_regular</item>
     </style>

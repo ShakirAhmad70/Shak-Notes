@@ -12,4 +12,7 @@
     <string name="sync">Sync</string>
     <string name="setup">Setup</string>
     <string name="notes_app">Notes App</string>
+    <string name="title">Enter title here</string>
+    <string name="note">Enter note here</string>
+    <string name="add_note">Add Note</string>
 </resources>

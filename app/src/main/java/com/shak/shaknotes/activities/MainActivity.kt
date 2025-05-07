@@ -33,13 +33,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
-        setSupportActionBar(binding.toolBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolBar.title = "Shak Notes"
-        binding.toolBar.subtitle = "Notes App"
-
-
+        //Set up the toolbar
+        setUpToolBar()
 
         binding.bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -49,12 +44,16 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
-        //Default fragment to be loaded
+        //Default fragment to be selected
         binding.bottomNav.selectedItemId = R.id.home
 
+    }
 
+    private fun setUpToolBar() {
+        setSupportActionBar(binding.toolBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolBar.title = "Shak Notes"
+        binding.toolBar.subtitle = "Notes App"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
