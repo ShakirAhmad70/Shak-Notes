@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
         //Default fragment to be selected
         binding.bottomNav.selectedItemId = R.id.home
 

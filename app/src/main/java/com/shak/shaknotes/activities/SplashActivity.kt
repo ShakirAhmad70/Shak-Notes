@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
 
-        binding.splashLottie.setMinAndMaxProgress(0.0f, 0.35f)  //Play the first 35% of the animation
+        binding.splashLottie.setMinAndMaxProgress(0.0f, 0.35f)
         binding.splashLottie.playAnimation()
 
         binding.splashLottie.addAnimatorListener(object : Animator.AnimatorListener {

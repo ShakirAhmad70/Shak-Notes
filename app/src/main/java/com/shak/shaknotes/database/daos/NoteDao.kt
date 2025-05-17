@@ -11,19 +11,15 @@ import com.shak.shaknotes.database.entities.Note
 @Dao
 interface NoteDao {
 
-    // Insert a single note
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNote(note: Note)
 
-    // Update an existing note
     @Update
     fun updateNote(note: Note)
 
-    // Delete a note
     @Delete
     fun deleteNote(note: Note)
 
-    // Get all notes as a Flow (for live data)
     @Query("SELECT * FROM notes ORDER BY id ASC")
     fun getAllNotes(): List<Note>
 

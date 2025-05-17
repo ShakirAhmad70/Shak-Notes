@@ -15,11 +15,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.shak.shaknotes.R
+import com.shak.shaknotes.adapters.NoteRvAdapter
 import com.shak.shaknotes.database.dbHelpers.NoteDbHelper
 import com.shak.shaknotes.database.entities.Note
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
+
+    private lateinit var noteAdapter: NoteRvAdapter
+    private val notesList = mutableListOf<Note>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,18 +34,38 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-
         val addNoteBtn = view.findViewById<AppCompatButton>(R.id.addNoteBtn)
         val addItemFab = view.findViewById<FloatingActionButton>(R.id.addItemFab)
         val showItemsRV = view.findViewById<RecyclerView>(R.id.showItemsRV)
         val showEmptyLay = view.findViewById<LinearLayoutCompat>(R.id.showEmptyLay)
 
-        val noteDbHelper: NoteDbHelper = NoteDbHelper.getInstance(requireContext())
+        noteAdapter = NoteRvAdapter(notesList).apply {
+            onDataChanged = {
+                if (notesList.isEmpty()) {
+                    showEmptyLay.visibility = View.VISIBLE
+                    showItemsRV.visibility = View.GONE
+                } else {
+                    showEmptyLay.visibility = View.GONE
+                    showItemsRV.visibility = View.VISIBLE
+                }
+            }
+        }
 
         showItemsRV.layoutManager = GridLayoutManager(requireContext(), 2)
+        showItemsRV.adapter = noteAdapter
 
+        val noteDbHelper = NoteDbHelper.getInstance(requireContext())
 
-        //Fab click listener
+        lifecycleScope.launch(Dispatchers.IO) {
+            val data = noteDbHelper.noteDao().getAllNotes()
+            withContext(Dispatchers.Main) {
+                notesList.clear()
+                notesList.addAll(data)
+                noteAdapter.notifyDataSetChanged()
+                noteAdapter.onDataChanged?.invoke()
+            }
+        }
+
         addItemFab.setOnClickListener {
             val addNoteDialog = Dialog(requireContext())
             addNoteDialog.setContentView(R.layout.add_note_dialog)
@@ -58,25 +84,19 @@ class HomeFragment : Fragment() {
                 val noteContent = edtNote.text.toString().trim()
 
                 if (title.isNotEmpty() && noteContent.isNotEmpty()) {
-                    lifecycleScope.launch {
-                        noteDbHelper.noteDao()
-                            .insertNote(Note(title = title, noteContent = noteContent))
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val note = Note(title = title, noteContent = noteContent)
+                        noteDbHelper.noteDao().insertNote(note)
 
-                        val notes: ArrayList<Note> = noteDbHelper.noteDao().getAllNotes() as ArrayList<Note>
+                        val updatedList = noteDbHelper.noteDao().getAllNotes()
 
-                        if (notes.isEmpty()) {
-                            showEmptyLay.visibility = View.VISIBLE
-                            showItemsRV.visibility = View.GONE
-                        } else {
-                            showEmptyLay.visibility = View.GONE
-                            showItemsRV.visibility = View.VISIBLE
+                        withContext(Dispatchers.Main) {
+                            notesList.clear()
+                            notesList.addAll(updatedList)
+                            noteAdapter.notifyDataSetChanged()
+                            noteAdapter.onDataChanged?.invoke()
+                            addNoteDialog.dismiss()
                         }
-
-
-                        showItemsRV.adapter = NoteRvAdapter(requireContext())
-
-
-                        addNoteDialog.dismiss()
                     }
                 } else {
                     Toast.makeText(
@@ -94,5 +114,4 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
 }
